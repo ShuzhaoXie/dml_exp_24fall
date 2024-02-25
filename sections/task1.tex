@@ -18,8 +18,8 @@
 \subsubsection{实验要求}
 \begin{itemize}
     \item 在MNIST数据集上完成图像分类任务
-    \item 实现GD、SGD、ADAM三种基于梯度的优化方法， 写出三个优化器类
-    \item 绘制三种优化方法下的loss函数变化图像，通过loss图像及其他实验结果，分析三种优化方法的特点
+    \item 参考SGD的实现示例，分别用PyTorch和MindSpore框架实现SGDM、ADAM两种基于梯度的优化方法， 写出两个优化器类
+    \item 绘制两种优化方法下的loss函数变化图像，通过loss图像及其他实验结果，分析两种优化方法的特点
 \end{itemize}
 
 \subsection{PyTorch优化器}
@@ -86,20 +86,32 @@ def train_loop(dataloader, model, loss_fn, optimizer):
 
 更多资料还可以参考mindspore官方文档：\url{https://mindspore.cn/tutorials/zh-CN/r2.0.0-alpha/advanced/modules/optimizer.html?highlight=%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BC%98%E5%8C%96%E5%99%A8}
 
-\subsection{几种算法回顾}
+\subsection{背景知识简单回顾}
+设待优化参数为$w$，目标函数为$f(w)$，学习率为$\alpha$, 则更新参数分为四步：
 
-梯度下降 Gradient Descent:
-\begin{align} 
-w_{t+1} = w_t - \eta \nabla f(w_t)
-\end{align}
+\begin{enumerate}
+    \item 计算t时刻目标函数对于当前参数的梯度：$g_t = \nabla f(w_t)$
+    \item 计算t时刻一阶动量$m_t$和二阶动量$V_t$
+    \item 计算t时刻下降梯度：$\eta_t = \alpha \times m_t / \sqrt{V_t}$
+    \item 更新t+1时刻参数：$w_{t+1} = w_t - \eta_t$
+\end{enumerate}
+不同优化器实质上只是定义了不同的一阶动量和二阶动量公式, 本实验涉及到的优化器有：
+% 梯度下降 Gradient Descent:
+% \begin{align} 
+% w_{t+1} = w_t - \eta \nabla f(w_t)
+% \end{align}
 随机梯度下降 Stochastic gradient descent：
 \begin{align} 
-w_{t+1} = w_t - \eta \nabla f_i(w_t)
+m_t = g_t \qquad V_t = 1
 \end{align}
-Adam：
+SGDM (SGD with Momentum):
+\begin{align}
+m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \qquad V_t = 1
+\end{align}
+Adam：用修正后的$\hat{m_t}$和$\hat{V_t}$计算$\eta_t$
 \begin{align} % amsmath package
-    m_{t+1} & = \beta_1 m_t + (1-\beta_1) \nabla f(w_t)   \\
-    g_{t+1} & = \beta_2 g_t + (1-\beta_2) (\nabla f(w_t))^2
+    m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t  \qquad \hat{m_t} = m_t/(1-{\beta_{1} }^{t})  \\
+    V_t = \beta_2 V_{t-1} + (1-\beta_2) (g_t)^2 \qquad \hat{V_t} = V_t/(1-{\beta_{2} }^{t}) 
 \end{align}
 
 
