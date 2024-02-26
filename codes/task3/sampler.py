@@ -19,6 +19,7 @@ class MySampler(Sampler):
                 indices=list(range(len(self.dataset)))
                 return iter(indices)
         """
+        # write your code here
         raise NotImplementedError
 
     def __len__(self):

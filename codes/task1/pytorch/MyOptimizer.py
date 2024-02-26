@@ -13,16 +13,26 @@ class BaseOptimizer():
                 p.grad.zero_()
 
 
-class GdOptimizer(BaseOptimizer):
+class SGDOptimizer(BaseOptimizer):
     def __init__(self, params, lr=0.001):
         super().__init__(params, lr)
+        self.state = dict()
+        for p in self.params:
+            self.state[p] = dict()
+            self.state[p]['t'] = 0 
         
     def step(self):
         for p in self.params:
             if p.grad is None:
-                # your code here
-                pass
-
-
+                continue
+            self.state[p]['t'] += 1
+            self.state[p]['m'] = p.grad
+            p.data.add_(self.state[p]['m'], alpha=-self.lr)
+        
+            
+class SGDMOptimizer(BaseOptimizer):
+    # write your code here
+    pass
 class AdamOptimizer(BaseOptimizer):
+    # write your code here
     pass
