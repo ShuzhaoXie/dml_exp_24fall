@@ -282,82 +282,82 @@ swapfile=E:\\wsl-swap.vhdx
 
 
 
-\section{使用深研院计算资源}\label{sec:env-setup-sigs-resources}
+% \section{使用深研院计算资源}\label{sec:env-setup-sigs-resources}
 
-% \textcolor{red}{\emph{注意，在该平台启动的开发环境需要首先手动调整一下DNS服务器，即在\graylstinline{/etc/resolv.conf}最上方添加一行“\graylstinline{nameserver 114.114.114.114}”即可。}}
+% % \textcolor{red}{\emph{注意，在该平台启动的开发环境需要首先手动调整一下DNS服务器，即在\graylstinline{/etc/resolv.conf}最上方添加一行“\graylstinline{nameserver 114.114.114.114}”即可。}}
 
-助教会为同学们下发用户名和密码。使用自己的账户信息登录网址：\url{http://10.103.9.27:30000/}(或使用助教的域名\url{http://sigs-gpu.cantjie.com:30000})。注意，账号可能是共享的，请同学们格外留意\emph{在创建开发环境时不要占用账号下的全部资源。}
+% 助教会为同学们下发用户名和密码。使用自己的账户信息登录网址：\url{http://10.103.9.27:30000/}(或使用助教的域名\url{http://sigs-gpu.cantjie.com:30000})。注意，账号可能是共享的，请同学们格外留意\emph{在创建开发环境时不要占用账号下的全部资源。}
 
-\subsection{创建开发环境}
+% \subsection{创建开发环境}
 
-登录系统后，我们需要创建一个开发环境。如图\ref{fig:sigs-platform-dev-env-before-create}所示，首先在左侧边栏选择AI分区->开发环境，然后点击创建。
+% 登录系统后，我们需要创建一个开发环境。如图\ref{fig:sigs-platform-dev-env-before-create}所示，首先在左侧边栏选择AI分区->开发环境，然后点击创建。
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/sigs-platform-dev-env-before-create.png}
-	\caption{caption:sigs-platform-dev-env-before-create}
-	\label{fig:sigs-platform-dev-env-before-create}
-\end{figure}
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.7\textwidth]{figures/sigs-platform-dev-env-before-create.png}
+% 	\caption{caption:sigs-platform-dev-env-before-create}
+% 	\label{fig:sigs-platform-dev-env-before-create}
+% \end{figure}
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{figures/sigs-platform-dev-env-create.png}
-	\caption{caption:sigs-platform-dev-env-create}
-	\label{fig:sigs-platform-dev-env-create}
-\end{figure}
-在弹出的窗口图\ref{fig:sigs-platform-dev-env-create}中，设置环境名称、镜像、储存位置、资源规格等信息。其中，当与小组同学共享账号时，请不要直接选择默认的资源规格，请通过自定义，限制环境所需的CPU核心数量、储存空间大小和显卡数量（譬如六人共享账号时，推荐每个人都将资源设置为最大可用资源的六分之一）。对于我们的实验，系统自带的镜像已基本可以满足需求，因此在镜像选择中，按图\ref{fig:sigs-platform-dev-env-image-selection}所示选择superadmin/pytorch:1.12.0-cuda11.3-cudnn8-runtime-2即可（注意末尾的-2，带-2的版本为本学期初根据课程需求定制的版本，不带-2的版本使用ssh连接进入后会找不到合适环境。）。
-
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.8\textwidth]{figures/sigs-platform-dev-env-image-selection.png}
-	\caption{caption:sigs-platform-dev-env-image-selection}
-	\label{fig:sigs-platform-dev-env-image-selection}
-\end{figure}
-
-创建时指定的储存路径会挂载到环境的\graylstinline{/private}目录下。
-
-\subsection{安装其他软件或包}
-
-新建完成后，点击启动，等待镜像状态变为运行中，访问方式一栏会出现SSH、远程桌面和VNC三种连接方式，操作一栏的打开按钮也会有灰变蓝。
-
-当我们需要使用镜像中尚未安装的工具或包时，可以通过访问方式提供的三种方式安装，譬如，在本地使用ssh连接服务器后，运行\graylstinline{conda install matplotlib}或\graylstinline{apt install git}等；也可通过点击打开按钮，在弹出页面中进入终端并安装，见图\ref{fig:sigs-platform-env-install-packages-via-web}。
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.9\textwidth]{figures/sigs-platform-env-install-packages-via-web.png}
-	\caption{caption:sigs-platform-env-install-packages-via-web}
-	\label{fig:sigs-platform-env-install-packages-via-web}
-\end{figure}
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.6\textwidth]{figures/sigs-platform-dev-env-create.png}
+% 	\caption{caption:sigs-platform-dev-env-create}
+% 	\label{fig:sigs-platform-dev-env-create}
+% \end{figure}
+% 在弹出的窗口图\ref{fig:sigs-platform-dev-env-create}中，设置环境名称、镜像、储存位置、资源规格等信息。其中，当与小组同学共享账号时，请不要直接选择默认的资源规格，请通过自定义，限制环境所需的CPU核心数量、储存空间大小和显卡数量（譬如六人共享账号时，推荐每个人都将资源设置为最大可用资源的六分之一）。对于我们的实验，系统自带的镜像已基本可以满足需求，因此在镜像选择中，按图\ref{fig:sigs-platform-dev-env-image-selection}所示选择superadmin/pytorch:1.12.0-cuda11.3-cudnn8-runtime-2即可（注意末尾的-2，带-2的版本为本学期初根据课程需求定制的版本，不带-2的版本使用ssh连接进入后会找不到合适环境。）。
 
 
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.8\textwidth]{figures/sigs-platform-dev-env-image-selection.png}
+% 	\caption{caption:sigs-platform-dev-env-image-selection}
+% 	\label{fig:sigs-platform-dev-env-image-selection}
+% \end{figure}
+
+% 创建时指定的储存路径会挂载到环境的\graylstinline{/private}目录下。
+
+% \subsection{安装其他软件或包}
+
+% 新建完成后，点击启动，等待镜像状态变为运行中，访问方式一栏会出现SSH、远程桌面和VNC三种连接方式，操作一栏的打开按钮也会有灰变蓝。
+
+% 当我们需要使用镜像中尚未安装的工具或包时，可以通过访问方式提供的三种方式安装，譬如，在本地使用ssh连接服务器后，运行\graylstinline{conda install matplotlib}或\graylstinline{apt install git}等；也可通过点击打开按钮，在弹出页面中进入终端并安装，见图\ref{fig:sigs-platform-env-install-packages-via-web}。
+
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.9\textwidth]{figures/sigs-platform-env-install-packages-via-web.png}
+% 	\caption{caption:sigs-platform-env-install-packages-via-web}
+% 	\label{fig:sigs-platform-env-install-packages-via-web}
+% \end{figure}
 
 
-\subsection{创建镜像环境}
-
-\textcolor{red}{\emph{注意，截止本指导书书发布时，由于平台缺乏技术文档，个人制作的镜像可能无法让容器正常启动。该小节仍有待完善。}}
-
-\textcolor{red}{\emph{注意，该平台为x86架构，arm平台上创建的镜像无法运行在该平台}}
-
-镜像创建方法可参考\S\ref{subsec:container-to-image}。
 
 
-在本地创建镜像后，使用\graylstinline{docker save -o filename.tar imagename:tag}\footnote{注意，此处不可使用sha256格式的imageID代替<imagename>:<tag>的格式，不然平台可能无法正确处理该镜像}命令导出镜像文件，然后上传至文件管理->我的文件栏目下（图\ref{fig:sigs-platform-upload-file}）。然后在镜像服务->我的镜像中创建镜像(图\ref{fig:sigs-platform-create-custom-image})。
+% \subsection{创建镜像环境}
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.25\textwidth]{figures/sigs-platform-upload-file.png}
-	\caption{caption:sigs-platform-upload-file}
-	\label{fig:sigs-platform-upload-file}
-\end{figure}
+% \textcolor{red}{\emph{注意，截止本指导书书发布时，由于平台缺乏技术文档，个人制作的镜像可能无法让容器正常启动。该小节仍有待完善。}}
+
+% \textcolor{red}{\emph{注意，该平台为x86架构，arm平台上创建的镜像无法运行在该平台}}
+
+% 镜像创建方法可参考\S\ref{subsec:container-to-image}。
 
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=1\textwidth]{figures/sigs-platform-create-custom-image.png}
-	\caption{caption:sigs-platform-create-custom-image}
-	\label{fig:sigs-platform-create-custom-image}
-\end{figure}
+% 在本地创建镜像后，使用\graylstinline{docker save -o filename.tar imagename:tag}\footnote{注意，此处不可使用sha256格式的imageID代替<imagename>:<tag>的格式，不然平台可能无法正确处理该镜像}命令导出镜像文件，然后上传至文件管理->我的文件栏目下（图\ref{fig:sigs-platform-upload-file}）。然后在镜像服务->我的镜像中创建镜像(图\ref{fig:sigs-platform-create-custom-image})。
+
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=0.25\textwidth]{figures/sigs-platform-upload-file.png}
+% 	\caption{caption:sigs-platform-upload-file}
+% 	\label{fig:sigs-platform-upload-file}
+% \end{figure}
+
+
+% \begin{figure}[htbp]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{figures/sigs-platform-create-custom-image.png}
+% 	\caption{caption:sigs-platform-create-custom-image}
+% 	\label{fig:sigs-platform-create-custom-image}
+% \end{figure}
 
 
 
