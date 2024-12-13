@@ -107,7 +107,7 @@ def main(rank, args):
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
     DATA_PATH = "./data"
-
+    os.makedirs(DATA_PATH, exist_ok=True)
     # initialize process group
     dist_utils.dist_init(args.n_devices, args.rank, args.master_addr, args.master_port)
     
